@@ -53,16 +53,12 @@ Licensed under the Apache License, Version 2.0 (the "License");
               </template>
               <template slot="option" slot-scope="option">
                 <div>
-                  {{ option.first_name }} {{ option.surname}} ({{ option.registrations.find((item) => {
-                    return item.activity === 'DRILL'
-                  }).registration_no}})
-                  </div>
+                  {{personNameReg (option)}}
+                </div>
               </template>
               <template slot="selected-option" slot-scope="option">
                 <div>
-                  {{ option.first_name }} {{ option.surname}} ({{ option.registrations.find((item) => {
-                    return item.activity === 'DRILL'
-                  }).registration_no}})
+                  {{personNameReg (option)}}
                 </div>
               </template>
             </v-select>
@@ -165,7 +161,13 @@ export default {
         vm.personOptions = response.data
         loading(false)
       })
-    }, 500)
+    }, 500),
+    personNameReg (option) {
+      let drillno = option.registrations.find((item) => {
+        return item.activity === 'DRILL'
+      }).registration_no || "Unavailable"
+      return option.first_name + " " + option.surname + " (" + drillno + ")"
+    }
   },
   watch: {
     personResponsible (val, prev) {
