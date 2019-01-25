@@ -204,7 +204,7 @@ export default {
         // On some browsers indexOf is faster than contains and vice versa. The trends seems to be that indexOf is faster
         return (item.name != null && item.name.toUpperCase().indexOf(search) !== -1) || (item.org_verbose_name != null && item.org_verbose_name.toUpperCase().indexOf(search) !== -1)
       })
-    }, 500),
+    },
     personNameReg (option) {
       let drillno = option.registrations.find((item) => {
         return item.activity === 'DRILL'
